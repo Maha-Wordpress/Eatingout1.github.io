@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eating Out - Enhanced Interactive Learning</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <i class="fas fa-utensils"></i>
+                    Eating Out - Interactive Learning
+                </h1>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="navigation">
+            <button class="nav-btn active" data-section="restaurant-types">
+                <i class="fas fa-store"></i>
+                Restaurant Types
+            </button>
+            <button class="nav-btn" data-section="menu-vocabulary">
+                <i class="fas fa-book-open"></i>
+                Menu Vocabulary
+            </button>
+            <button class="nav-btn" data-section="general-vocabulary">
+                <i class="fas fa-comments"></i>
+                General Vocabulary
+            </button>
+            <button class="nav-btn" data-section="conversations">
+                <i class="fas fa-microphone"></i>
+                Conversations
+            </button>
+            <button class="nav-btn" data-section="pronunciation">
+                <i class="fas fa-volume-up"></i>
+                Pronunciation
+            </button>
+            <button class="nav-btn" data-section="activities">
+                <i class="fas fa-gamepad"></i>
+                Activities
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Restaurant Types Section -->
+            <section id="restaurant-types" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-store"></i> Restaurant Types</h2>
+                    <p>Learn about different types of restaurants with images and audio pronunciation</p>
+                </div>
+                
+                <div class="restaurant-grid">
+                    <!-- Restaurant type cards will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Menu Vocabulary Section -->
+            <section id="menu-vocabulary" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-book-open"></i> Menu Vocabulary</h2>
+                    <p>Explore food-related vocabulary organized by categories</p>
+                </div>
+                
+                <div class="vocabulary-categories">
+                    <!-- Menu vocabulary categories will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- General Vocabulary Section -->
+            <section id="general-vocabulary" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-comments"></i> General Restaurant Vocabulary</h2>
+                    <p>Learn about service, staff, and dining processes</p>
+                </div>
+                
+                <div class="vocabulary-categories">
+                    <!-- General vocabulary categories will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Conversations Section -->
+            <section id="conversations" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-microphone"></i> Real-Life Conversations</h2>
+                    <p>Listen to authentic restaurant conversations and test your comprehension</p>
+                </div>
+                
+                <div class="conversations-container">
+                    <!-- Conversation cards will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Pronunciation Practice Section -->
+            <section id="pronunciation" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-volume-up"></i> Pronunciation Practice</h2>
+                    <p>Record yourself and get feedback on your pronunciation</p>
+                </div>
+                
+                <div class="pronunciation-practice">
+                    <div class="word-display">
+                        <h3 id="practiceWord">Select a word to practice</h3>
+                        <button id="playWordBtn" class="audio-btn" disabled>
+                            <i class="fas fa-play"></i> Listen
+                        </button>
+                    </div>
+                    
+                    <div class="recording-controls">
+                        <button id="recordBtn" class="record-btn" disabled>
+                            <i class="fas fa-microphone"></i> Record
+                        </button>
+                        <button id="stopRecordBtn" class="stop-btn" disabled>
+                            <i class="fas fa-stop"></i> Stop
+                        </button>
+                        <button id="playRecordingBtn" class="play-btn" disabled>
+                            <i class="fas fa-play"></i> Play Recording
+                        </button>
+                    </div>
+                    
+                    <div class="feedback-area">
+                        <div id="pronunciationFeedback" class="feedback-message"></div>
+                        <div id="accuracyScore" class="accuracy-score"></div>
+                    </div>
+                    
+                    <div class="word-selector">
+                        <h4>Choose a word to practice:</h4>
+                        <div id="practiceWordsList" class="practice-words-grid">
+                            <!-- Practice words will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activities Section -->
+            <section id="activities" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-gamepad"></i> Interactive Activities</h2>
+                    <p>Test your knowledge with games and exercises</p>
+                </div>
+                
+                <div class="activities-grid">
+                    <!-- Activity cards will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Audio Player (Hidden) -->
+        <audio id="audioPlayer" preload="none"></audio>
+        
+        <!-- Conversation Modal -->
+        <div id="conversationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="conversationTitle">Conversation</h3>
+                    <button class="close-btn" id="closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="conversation-player">
+                        <div id="conversationText" class="conversation-text"></div>
+                        <div class="conversation-controls">
+                            <button id="playConversationBtn" class="audio-btn">
+                                <i class="fas fa-play"></i> Play Conversation
+                            </button>
+                            <button id="pauseConversationBtn" class="audio-btn">
+                                <i class="fas fa-pause"></i> Pause
+                            </button>
+                        </div>
+                    </div>
+                    <div class="comprehension-questions">
+                        <h4>Listening Comprehension Questions:</h4>
+                        <div id="questionsContainer"></div>
+                        <button id="checkAnswersBtn" class="check-btn">Check Answers</button>
+                        <div id="resultsContainer" class="results"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Card Modal -->
+        <div id="vocabularyModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="vocabularyTitle">Vocabulary</h3>
+                    <button class="close-btn" id="closeVocabModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="vocabulary-details">
+                        <div id="vocabularyContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="vocabulary-data.js"></script>
+    <script src="conversations-data.js"></script>
+    <script src="audio-generator.js"></script>
+    <script src="speech-recognition.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
